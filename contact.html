@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ | Virtuoso Inc.</title>
+    <meta name="description" content="株式会社ヴァーチュオーゾへのお問い合わせページです。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/">Virtuoso</a>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">TOP</a>
+                <a href="about.html" class="nav-link">COMPANY</a>
+                <a href="privacy.html" class="nav-link">PRIVACY POLICY</a>
+                <a href="contact.html" class="nav-link active">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section">
+        <div class="contact-form-bg"></div>
+        <div class="contact-form-orb contact-form-orb-1"></div>
+        <div class="contact-form-orb contact-form-orb-2"></div>
+
+        <div class="container-small">
+            <!-- Header -->
+            <div class="section-header fade-up">
+                <h1 class="section-title gradient-text">CONTACT</h1>
+                <div class="section-divider"></div>
+                <p class="contact-subtitle">「まずは相談したい」だけでもお気軽にお問い合わせください。</p>
+            </div>
+
+            <!-- Form Card -->
+            <div class="contact-form-card fade-up delay-1">
+                <form id="contactForm" method="POST" action="contact.php">
+                    <!-- Category Field -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="form-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"></line><line x1="8" x2="21" y1="12" y2="12"></line><line x1="8" x2="21" y1="18" y2="18"></line><line x1="3" x2="3.01" y1="6" y2="6"></line><line x1="3" x2="3.01" y1="12" y2="12"></line><line x1="3" x2="3.01" y1="18" y2="18"></line></svg>
+                            お問い合わせ項目 <span class="required">*</span>
+                        </label>
+                        <select name="category" required class="form-input">
+                            <option value="">選択してください</option>
+                            <option value="website">WEBサイト制作について</option>
+                            <option value="renewal">サイトリニューアルについて</option>
+                            <option value="ecsite">EC SITE制作について</option>
+                            <option value="system">システム開発について</option>
+                            <option value="sns">SNS運用について</option>
+                            <option value="ad">広告のご相談</option>
+                            <option value="marketing">マーケティング戦略のご相談</option>
+                            <option value="other">その他</option>
+                        </select>
+                    </div>
+
+                    <!-- Name Field -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="form-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            お名前 <span class="required">*</span>
+                        </label>
+                        <input type="text" name="name" required class="form-input" placeholder="山田 太郎">
+                    </div>
+
+                    <!-- Company Field -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="form-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M9 8h1"></path><path d="M9 12h1"></path><path d="M9 16h1"></path><path d="M14 8h1"></path><path d="M14 12h1"></path><path d="M14 16h1"></path><path d="M6 3v18"></path><path d="M18 3v18"></path><path d="M6 3h12"></path></svg>
+                            法人様名
+                        </label>
+                        <input type="text" name="company" class="form-input" placeholder="株式会社◯◯">
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="form-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                            メールアドレス <span class="required">*</span>
+                        </label>
+                        <input type="email" name="email" required class="form-input" placeholder="example@vto.co.jp">
+                    </div>
+
+                    <!-- Email Confirmation Field -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="form-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                            メールアドレス（確認用） <span class="required">*</span>
+                        </label>
+                        <input type="email" name="emailConfirm" required class="form-input" placeholder="example@vto.co.jp">
+                    </div>
+
+                    <!-- Message Field -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="form-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            お問い合わせ内容 <span class="required">*</span>
+                        </label>
+                        <textarea name="message" required class="form-textarea" rows="6" placeholder="お問い合わせ内容をご記入ください"></textarea>
+                    </div>
+
+                    <!-- Privacy Policy Checkbox -->
+                    <div class="form-checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="privacy" required class="form-checkbox">
+                            <span class="checkbox-text">
+                                <a href="privacy.html" target="_blank" class="privacy-link">プライバシーポリシー</a>に同意する <span class="required">*</span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-submit">
+                        <button type="submit" class="submit-button">
+                            <div class="submit-button-bg"></div>
+                            <div class="submit-button-shine"></div>
+                            <div class="submit-button-glow"></div>
+                            <svg class="submit-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                            <span>送信する</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bg"></div>
+        <div class="footer-overlay"></div>
+        <div class="footer-grid"></div>
+        
+        <div class="container">
+            <div class="footer-content fade-up">
+                <div class="footer-company">
+                    <h3 class="footer-title">Virtuoso Inc.</h3>
+                    <p class="footer-subtitle">株式会社ヴァーチュオーゾ</p>
+                </div>
+
+                <div class="footer-links">
+                    <nav class="footer-nav">
+                        <a href="/" class="footer-link">TOP</a>
+                        <a href="about.html" class="footer-link">会社概要</a>
+                    </nav>
+                    <nav class="footer-nav">
+                        <a href="privacy.html" class="footer-link">プライバシーポリシー</a>
+                        <a href="contact.html" class="footer-link">コンタクト</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="footer-copyright fade-up delay-1">
+                <p>&copy; <span id="year"></span> Virtuoso Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>
