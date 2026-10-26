@@ -4,6 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Essential first-paint cover: active before external scripts or page content. -->
+    <style>
+      html.loader-pending::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 1199;
+        background: #f7f6f2;
+      }
+      html.loader-pending .loader { display: flex; }
+    </style>
+    <script data-cookieconsent="ignore">
+      document.documentElement.classList.add('loader-pending');
+      window.virtuosoLoaderWatchdog = setTimeout(function () {
+        document.documentElement.classList.remove('loader-pending');
+        if (document.body) {
+          document.body.classList.remove('is-loading', 'is-revealing');
+        }
+        var loader = document.getElementById('loader');
+        if (loader) loader.remove();
+      }, 12000);
+    </script>
+
     <!-- Cookiebot CMP (must be loaded before any non-essential scripts) -->
     <script
       id="Cookiebot"
@@ -64,7 +87,7 @@
 <path style="--i:7" pathLength="1" id="letter-O2" d="M1495 32 C1506 29 1516 28 1527 28 C1575 28 1609 61 1609 105 C1609 136 1590 162 1554 179 L1554 169 C1571 153 1577 133 1577 109 C1577 66 1555 36 1522 36 C1513 36 1505 37 1497 40 Z M1486 37 L1485 47 C1472 64 1465 84 1467 108 C1470 150 1492 176 1527 176 C1534 176 1540 175 1546 173 L1544 182 C1537 184 1530 185 1522 185 C1475 185 1438 154 1438 111 C1438 77 1456 52 1486 37 Z"/>
 </g>
 </svg></div><div class="status"><span class="dot"></span><span>PREPARING YOUR EXPERIENCE</span></div><span class="corner">VIRTUOSO</span></div>
-    <script src="js/loader.js"></script>
+    <script src="js/loader.js" data-cookieconsent="ignore"></script>
     <!-- Navigation -->
     <nav class="nav" id="nav">
       <div class="nav-container">

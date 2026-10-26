@@ -33,6 +33,8 @@
         clearTimeout(finishTimer);
         clearTimeout(fallback);
         alignLogo();
+        clearTimeout(window.virtuosoLoaderWatchdog);
+        document.documentElement.classList.remove('loader-pending');
         overlay.classList.add('done');
         overlay.setAttribute('aria-hidden', 'true');
         document.body.classList.add('is-revealing');
