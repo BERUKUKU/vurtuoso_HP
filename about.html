@@ -5,27 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>会社概要 | Virtuoso Inc.</title>
     <meta name="description" content="株式会社ヴァーチュオーゾの会社概要ページです。">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/subpages.css">
 </head>
-<body>
+<body class="subpage">
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="/">Virtuoso</a>
+                <a href="/" aria-label="VIRTUOSO トップページ"><img class="brand-wordmark" src="assets/images/VIRTUOSO-wordmark.svg" alt="VIRTUOSO" width="1600" height="237"></a>
             </div>
-            <div class="nav-links">
+            <div class="nav-links" id="primary-navigation">
                 <a href="/" class="nav-link">TOP</a>
                 <a href="about.html" class="nav-link active">COMPANY</a>
                 <a href="privacy.html" class="nav-link">PRIVACY POLICY</a>
                 <a href="contact.html" class="nav-link">CONTACT</a>
             </div>
+            <button
+                class="nav-toggle"
+                type="button"
+                aria-label="メニューを開く"
+                aria-controls="primary-navigation"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <section class="subpage-hero" aria-labelledby="page-title">
+      <div class="hero-cloud subpage-cloud" aria-hidden="true"></div>
+      <div class="subpage-hero-content">
+        <h1 id="page-title">COMPANY</h1>
+        <p>会社概要</p>
+      </div>
+    </section>
+
+
+    <div class="scroll-bg-global" id="scrollBgGlobal" aria-hidden="true">
+      <div class="hero-cloud ambient-cloud"></div>
+        <canvas id="scroll-bg-canvas"></canvas>
+        <div class="scroll-bg-vignette"></div>
+    </div>
 
     <!-- About Section -->
     <section class="about-section" id="about">
@@ -35,11 +59,7 @@
 
         <div class="container-small">
             <!-- Header -->
-            <div class="section-header fade-up">
-                <h1 class="section-title gradient-text">COMPANY</h1>
-                <div class="section-divider"></div>
-                <p class="about-subtitle">会社概要</p>
-            </div>
+
 
             <!-- Company Info Cards -->
             <div class="about-grid">
@@ -89,7 +109,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     </div>
                     <p class="about-label">住所</p>
-                    <p class="about-value">東京都港区南青山2-15-1214</p>
+                    <p class="about-value">東京都港区南青山2丁目2-15-1214</p>
                     <div class="about-corner"></div>
                 </div>
 
@@ -118,13 +138,14 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-bg"></div>
+      <div class="hero-cloud footer-cloud" aria-hidden="true"></div>
         <div class="footer-overlay"></div>
         <div class="footer-grid"></div>
-        
+
         <div class="container">
             <div class="footer-content fade-up">
                 <div class="footer-company">
-                    <h3 class="footer-title">Virtuoso Inc.</h3>
+                    <h3 class="footer-title"><img class="brand-wordmark" src="assets/images/VIRTUOSO-wordmark.svg" alt="VIRTUOSO" width="1600" height="237"></h3>
                     <p class="footer-subtitle">株式会社ヴァーチュオーゾ</p>
                 </div>
 

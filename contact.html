@@ -5,27 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>お問い合わせ | Virtuoso Inc.</title>
     <meta name="description" content="株式会社ヴァーチュオーゾへのお問い合わせページです。">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/subpages.css">
 </head>
-<body>
+<body class="subpage">
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="/">Virtuoso</a>
+                <a href="/" aria-label="VIRTUOSO トップページ"><img class="brand-wordmark" src="assets/images/VIRTUOSO-wordmark.svg" alt="VIRTUOSO" width="1600" height="237"></a>
             </div>
-            <div class="nav-links">
+            <div class="nav-links" id="primary-navigation">
                 <a href="/" class="nav-link">TOP</a>
                 <a href="about.html" class="nav-link">COMPANY</a>
                 <a href="privacy.html" class="nav-link">PRIVACY POLICY</a>
                 <a href="contact.html" class="nav-link active">CONTACT</a>
             </div>
+            <button
+                class="nav-toggle"
+                type="button"
+                aria-label="メニューを開く"
+                aria-controls="primary-navigation"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <section class="subpage-hero" aria-labelledby="page-title">
+      <div class="hero-cloud subpage-cloud" aria-hidden="true"></div>
+      <div class="subpage-hero-content">
+        <h1 id="page-title">CONTACT</h1>
+        <p>「まずは相談したい」だけでもお気軽にお問い合わせください。</p>
+      </div>
+    </section>
+
+
+    <div class="scroll-bg-global" id="scrollBgGlobal" aria-hidden="true">
+      <div class="hero-cloud ambient-cloud"></div>
+        <canvas id="scroll-bg-canvas"></canvas>
+        <div class="scroll-bg-vignette"></div>
+    </div>
 
     <!-- Contact Form Section -->
     <section class="contact-form-section">
@@ -35,15 +59,15 @@
 
         <div class="container-small">
             <!-- Header -->
-            <div class="section-header fade-up">
-                <h1 class="section-title gradient-text">CONTACT</h1>
-                <div class="section-divider"></div>
-                <p class="contact-subtitle">「まずは相談したい」だけでもお気軽にお問い合わせください。</p>
-            </div>
+
 
             <!-- Form Card -->
             <div class="contact-form-card fade-up delay-1">
                 <form id="contactForm" method="POST" action="contact.php">
+                    <!-- Honeypot (bot trap: hidden from humans) -->
+                    <div class="hp-field" aria-hidden="true">
+                        <label>website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+                    </div>
                     <!-- Category Field -->
                     <div class="form-group">
                         <label class="form-label">
@@ -136,13 +160,14 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-bg"></div>
+      <div class="hero-cloud footer-cloud" aria-hidden="true"></div>
         <div class="footer-overlay"></div>
         <div class="footer-grid"></div>
-        
+
         <div class="container">
             <div class="footer-content fade-up">
                 <div class="footer-company">
-                    <h3 class="footer-title">Virtuoso Inc.</h3>
+                    <h3 class="footer-title"><img class="brand-wordmark" src="assets/images/VIRTUOSO-wordmark.svg" alt="VIRTUOSO" width="1600" height="237"></h3>
                     <p class="footer-subtitle">株式会社ヴァーチュオーゾ</p>
                 </div>
 
@@ -165,6 +190,5 @@
     </footer>
 
     <script src="js/script.js"></script>
-    <script src="js/contact.js"></script>
 </body>
 </html>

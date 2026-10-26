@@ -27,21 +27,45 @@
         .btn-secondary:hover { border-color: #c4b5fd; transform: translateY(-2px); }
         .thanks-note { text-align: center; font-size: 0.9rem; color: #4b5563; margin-top: 1rem; font-weight: 300; }
     </style>
+    <link rel="stylesheet" href="css/subpages.css">
 </head>
-<body>
+<body class="subpage">
     <nav class="nav" id="nav">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="/">Virtuoso</a>
+                <a href="/" aria-label="VIRTUOSO トップページ"><img class="brand-wordmark" src="assets/images/VIRTUOSO-wordmark.svg" alt="VIRTUOSO" width="1600" height="237"></a>
             </div>
-            <div class="nav-links">
+            <div class="nav-links" id="primary-navigation">
                 <a href="/" class="nav-link">TOP</a>
                 <a href="about.html" class="nav-link">COMPANY</a>
                 <a href="privacy.html" class="nav-link">PRIVACY POLICY</a>
                 <a href="contact.html" class="nav-link">CONTACT</a>
             </div>
+            <button
+                class="nav-toggle"
+                type="button"
+                aria-label="メニューを開く"
+                aria-controls="primary-navigation"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+    <div class="scroll-bg-global" id="scrollBgGlobal" aria-hidden="true">
+      <div class="hero-cloud ambient-cloud"></div>
+    </div>
+
+    <section class="subpage-hero" aria-labelledby="page-title">
+      <div class="hero-cloud subpage-cloud" aria-hidden="true"></div>
+      <div class="subpage-hero-content">
+        <h1 id="page-title">THANK YOU</h1>
+        <p>お問い合わせを受け付けました</p>
+      </div>
+    </section>
+
 
     <main class="thanks-shell">
         <div class="thanks-bg"></div>
@@ -49,7 +73,7 @@
             <div class="thanks-icon" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg>
             </div>
-            <h1 class="thanks-title">お問い合わせありがとうございます</h1>
+            <h2 class="thanks-title">お問い合わせありがとうございます</h2>
             <p class="thanks-lead">送信内容を受け付けました。担当者が確認のうえ、通常1〜2営業日以内にご連絡いたします。<br>恐れ入りますが、いましばらくお待ちください。</p>
 
             <div class="thanks-grid">
@@ -73,6 +97,36 @@
         </div>
     </main>
 
+<footer class="footer">
+        <div class="footer-bg"></div>
+      <div class="hero-cloud footer-cloud" aria-hidden="true"></div>
+        <div class="footer-overlay"></div>
+        <div class="footer-grid"></div>
+
+        <div class="container">
+            <div class="footer-content fade-up">
+                <div class="footer-company">
+                    <h3 class="footer-title"><img class="brand-wordmark" src="assets/images/VIRTUOSO-wordmark.svg" alt="VIRTUOSO" width="1600" height="237"></h3>
+                    <p class="footer-subtitle">株式会社ヴァーチュオーゾ</p>
+                </div>
+
+                <div class="footer-links">
+                    <nav class="footer-nav">
+                        <a href="/" class="footer-link">TOP</a>
+                        <a href="about.html" class="footer-link">会社概要</a>
+                    </nav>
+                    <nav class="footer-nav">
+                        <a href="privacy.html" class="footer-link">プライバシーポリシー</a>
+                        <a href="contact.html" class="footer-link">コンタクト</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="footer-copyright fade-up delay-1">
+                <p>&copy; <span id="year"></span> Virtuoso Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
     <script src="js/script.js"></script>
 </body>
 </html>

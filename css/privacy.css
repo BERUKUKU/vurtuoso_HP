@@ -11,7 +11,8 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, rgba(239, 246, 255, 0.4) 0%, rgba(243, 232, 255, 0.5) 50%, rgba(252, 231, 243, 0.4) 100%);
-    animation: privacyBg 20s ease-in-out infinite;
+    animation: none;
+    display: none;
 }
 
 @keyframes privacyBg {
@@ -33,6 +34,7 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
+    display: none;
 }
 
 .privacy-orb-1 {
@@ -85,8 +87,8 @@
 
 .privacy-card {
     position: relative;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: none;
     padding: 2.5rem;
     margin-bottom: 2rem;
     border-radius: 16px;

@@ -1,11 +1,109 @@
-// Navigation scroll effect
-window.addEventListener('scroll', () => {
+// Match the header to the surface currently passing behind it.
+document.addEventListener('DOMContentLoaded', () => {
     const nav = document.getElementById('nav');
-    if (window.scrollY > 100) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
+    if (!nav) return;
+    const darkSurfaces = [...document.querySelectorAll('.hero-scene, .subpage-hero, #philosophy, .footer')];
+    let queued = false;
+    const update = () => {
+        queued = false;
+        const headerHeight = nav.getBoundingClientRect().height;
+        document.documentElement.style.setProperty('--site-header-height', `${headerHeight}px`);
+        const sampleY = headerHeight / 2;
+        const dark = darkSurfaces.some((surface) => {
+            const rect = surface.getBoundingClientRect();
+            return rect.top <= sampleY && rect.bottom > sampleY;
+        });
+        nav.classList.toggle('on-dark', dark);
+        nav.classList.toggle('scrolled', window.scrollY > 32);
+    };
+    const schedule = () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    window.addEventListener('load', update, { once: true });
+    document.fonts.ready.then(update);
+});
+
+// Mobile navigation
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.getElementById('nav');
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    if (!nav || !toggle || !links) return;
+
+    const closeMenu = () => {
+        links.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'メニューを開く');
+    };
+
+    toggle.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        links.classList.toggle('is-open', !isOpen);
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+        toggle.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
+    });
+
+    links.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (event) => {
+        if (nav.contains(event.target)) return;
+        closeMenu();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenu();
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) closeMenu();
+    });
+});
+
+// A small depth shift follows native scrolling without pinning the page.
+document.addEventListener('DOMContentLoaded', () => {
+    const hero = document.getElementById('hero');
+    const image = hero?.querySelector('.hero-img');
+    const mist = hero?.querySelector('.hero-mist');
+    const scene = hero?.closest('.hero-scene');
+    if (!hero || !image) return;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let ticking = false;
+
+    const update = () => {
+        ticking = false;
+        if (motion.matches) {
+            hero.style.removeProperty('--hero-content-opacity');
+            image.style.removeProperty('translate');
+            if (mist) mist.style.removeProperty('transform');
+            return;
+        }
+        const rect = hero.getBoundingClientRect();
+        if (scene) {
+            const travelled = Math.max(0, -scene.getBoundingClientRect().top);
+            const fade = Math.min(1, Math.max(0, (travelled / rect.height - 0.02) / 0.2));
+            hero.style.setProperty('--hero-content-opacity', String(1 - fade));
+        }
+        const progress = Math.min(1, Math.max(0, -rect.top / rect.height));
+        // Stay inside the existing image crop so no empty edges appear.
+        image.style.translate = `0 ${progress * rect.height * 0.04}px`;
+        if (mist) mist.style.transform = `translateY(${progress * 18}px)`;
+    };
+    const schedule = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    motion.addEventListener('change', schedule);
 });
 
 // Set current year in footer
@@ -52,15 +150,6 @@ function createPhilosophyParticles() {
 document.addEventListener('DOMContentLoaded', () => {
     createParticles('particles', 20);
     createPhilosophyParticles();
-
-    // Ensure hero video starts; some browsers pause autoplay even when muted
-    const heroVideo = document.querySelector('.hero-img');
-    if (heroVideo) {
-        heroVideo.muted = true;
-        heroVideo.playsInline = true;
-        heroVideo.preload = 'auto';
-        heroVideo.play().catch(() => {});
-    }
 });
 
 // Intersection Observer for fade-up animations
@@ -169,19 +258,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Auto play gallery videos immediately
-document.addEventListener('DOMContentLoaded', () => {
-    const galleryVideos = document.querySelectorAll('.gallery-video');
-    if (!galleryVideos.length) return;
-
-    galleryVideos.forEach(video => {
-        video.muted = true;
-        video.playsInline = true;
-        video.preload = 'auto';
-        video.play().catch(() => {});
-    });
-});
-
 // Gallery scroll-in reveal with staggered timing for a luxe feel
 document.addEventListener('DOMContentLoaded', () => {
     const galleryRows = document.querySelectorAll('.gallery-row');
@@ -227,14 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Fade out loader once assets are ready
-window.addEventListener('load', () => {
-    const loader = document.getElementById('loader');
-    if (!loader) return;
-    loader.classList.add('hide');
-    setTimeout(() => loader.remove(), 700);
-});
-
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -256,11 +324,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
+    const isHomePage = Boolean(document.getElementById('hero'));
+
+    if (!isHomePage) {
+        const currentPage = window.location.pathname.split('/').pop() || '/';
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            link.classList.toggle('active', href === currentPage);
+        });
+        return;
+    }
     
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         if (window.pageYOffset >= sectionTop - 200) {
             current = section.getAttribute('id');
         }
@@ -276,7 +353,7 @@ window.addEventListener('scroll', () => {
         const href = link.getAttribute('href');
         
         // Handle different page links
-        if (href === 'index.html' && current === 'hero') {
+        if ((href === '/' || href === 'index.html') && current === 'hero') {
             link.classList.add('active');
         } else if (href.includes('#') && href.includes(current)) {
             link.classList.add('active');
@@ -284,12 +361,72 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const heroContent = document.querySelector('.hero-content');
-    
-    // Keep hero content visible; simple clamp if needed later
-    if (heroContent) {
-        heroContent.style.opacity = 1;
-    }
+// Shared page background switching
+document.addEventListener('DOMContentLoaded', () => {
+    const bgLayer = document.getElementById('scrollBgGlobal');
+    if (!bgLayer || document.body.classList.contains('home-page') || document.body.classList.contains('subpage')) return;
+
+    const sectionToneMap = [
+        { selector: '#gallery', tone: 'soft' },
+        { selector: '#service', tone: 'base' },
+        { selector: '#flow', tone: 'soft' },
+        { selector: '#contact', tone: 'base' },
+        { selector: '.about-section', tone: 'base' },
+        { selector: '.contact-form-section', tone: 'soft' },
+        { selector: '.privacy-section', tone: 'base' },
+        { selector: '.thanks-shell', tone: 'soft' },
+        { selector: '.footer', tone: 'base' }
+    ];
+
+    const trackedSections = sectionToneMap
+        .map(({ selector, tone }) => {
+            const el = document.querySelector(selector);
+            return el ? { el, tone } : null;
+        })
+        .filter(Boolean);
+
+    if (!trackedSections.length) return;
+
+    const startSection = trackedSections[0].el;
+    const endSection = trackedSections[trackedSections.length - 1].el;
+    const pageTop = (el) => el.getBoundingClientRect().top + window.scrollY;
+    const pageBottom = (el) => pageTop(el) + el.offsetHeight;
+
+    const updateVisibility = () => {
+        const y = window.scrollY;
+        // The lower plane must be visible as soon as Gallery enters below Philosophy.
+        const revealOffset = document.querySelector('.hero-scene') ? window.innerHeight : 0;
+        const startY = pageTop(startSection) - revealOffset - 24;
+        const endY = pageBottom(endSection) - window.innerHeight + 24;
+        const visible = y >= startY && y <= Math.max(startY, endY);
+        bgLayer.classList.toggle('is-visible', visible);
+
+    };
+
+    const setTone = (tone) => {
+        bgLayer.dataset.tone = tone;
+    };
+
+    setTone(trackedSections[0].tone);
+    updateVisibility();
+
+    const observer = new IntersectionObserver((entries) => {
+        let nextTone = null;
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const match = trackedSections.find((s) => s.el === entry.target);
+                if (match) nextTone = match.tone;
+            }
+        });
+        if (nextTone) setTone(nextTone);
+    }, {
+        root: null,
+        rootMargin: '-35% 0px -35% 0px',
+        threshold: 0
+    });
+
+    trackedSections.forEach(({ el }) => observer.observe(el));
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility);
 });

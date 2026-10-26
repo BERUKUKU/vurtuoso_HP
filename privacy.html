@@ -8,30 +8,51 @@
       name="description"
       content="株式会社ヴァーチュオーゾのプライバシーポリシーページです。"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/privacy.css" />
-  </head>
-  <body>
+      <link rel="stylesheet" href="css/subpages.css">
+</head>
+  <body class="subpage">
     <!-- Navigation -->
     <nav class="nav" id="nav">
       <div class="nav-container">
         <div class="nav-logo">
-          <a href="/">Virtuoso</a>
+          <a href="/" aria-label="VIRTUOSO トップページ"><img class="brand-wordmark" src="assets/images/VIRTUOSO-wordmark.svg" alt="VIRTUOSO" width="1600" height="237"></a>
         </div>
-        <div class="nav-links">
+        <div class="nav-links" id="primary-navigation">
           <a href="/" class="nav-link">TOP</a>
           <a href="about.html" class="nav-link">COMPANY</a>
           <a href="privacy.html" class="nav-link active">PRIVACY POLICY</a>
           <a href="contact.html" class="nav-link">CONTACT</a>
         </div>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="メニューを開く"
+          aria-controls="primary-navigation"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
+
+    <section class="subpage-hero" aria-labelledby="page-title">
+      <div class="hero-cloud subpage-cloud" aria-hidden="true"></div>
+      <div class="subpage-hero-content">
+        <h1 id="page-title">PRIVACY POLICY</h1>
+        <p>プライバシーポリシー</p>
+      </div>
+    </section>
+
+
+    <div class="scroll-bg-global" id="scrollBgGlobal" aria-hidden="true">
+      <div class="hero-cloud ambient-cloud"></div>
+      <canvas id="scroll-bg-canvas"></canvas>
+      <div class="scroll-bg-vignette"></div>
+    </div>
 
     <!-- Privacy Policy Section -->
     <section class="privacy-section">
@@ -41,11 +62,7 @@
 
       <div class="container-small">
         <!-- Header -->
-        <div class="section-header fade-up">
-          <h1 class="section-title gradient-text">PRIVACY POLICY</h1>
-          <div class="section-divider"></div>
-          <p class="privacy-subtitle">プライバシーポリシー</p>
-        </div>
+
 
         <!-- Privacy Content -->
         <div class="privacy-content">
@@ -251,13 +268,14 @@
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-bg"></div>
+      <div class="hero-cloud footer-cloud" aria-hidden="true"></div>
       <div class="footer-overlay"></div>
       <div class="footer-grid"></div>
 
       <div class="container">
         <div class="footer-content fade-up">
           <div class="footer-company">
-            <h3 class="footer-title">Virtuoso Inc.</h3>
+            <h3 class="footer-title"><img class="brand-wordmark" src="assets/images/VIRTUOSO-wordmark.svg" alt="VIRTUOSO" width="1600" height="237"></h3>
             <p class="footer-subtitle">株式会社ヴァーチュオーゾ</p>
           </div>
 

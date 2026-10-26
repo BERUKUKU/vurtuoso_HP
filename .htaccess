@@ -1,9 +1,20 @@
 # Redirect /index.html to /
 RewriteEngine On
 
+# Force HTTPS (301). Placed above the index.html rule so http://host/index.html
+# is redirected to https://host/index.html first, then to https://host/ (2 hops).
+# Query string is preserved by default. www/non-www is left as-is.
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
 # 例: https://example.com/index.html → https://example.com/
 RewriteCond %{THE_REQUEST} \s/+index\.html(?:[?\s]|$) [NC]
 RewriteRule ^index\.html$ / [R=301,L]
 
 # Ensure directory index serves index.html
 DirectoryIndex index.html
+
+# Hide PHP version (X-Powered-By). "always" so it also applies to CGI responses.
+<IfModule mod_headers.c>
+  Header always unset X-Powered-By
+</IfModule>

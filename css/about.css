@@ -11,7 +11,8 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, rgba(239, 246, 255, 0.4) 0%, rgba(243, 232, 255, 0.5) 50%, rgba(252, 231, 243, 0.4) 100%);
-    animation: aboutBg 20s ease-in-out infinite;
+    animation: none;
+    display: none;
 }
 
 @keyframes aboutBg {
@@ -33,6 +34,7 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
+    display: none;
 }
 
 .about-orb-1 {
@@ -89,7 +91,7 @@
 .about-card {
     position: relative;
     background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(8px);
+    backdrop-filter: none;
     padding: 2rem;
     border-radius: 16px;
     border: 1px solid rgba(216, 180, 254, 0.3);
@@ -232,7 +234,7 @@
     background: linear-gradient(90deg, #fda4af, #c084fc, #93c5fd);
     background-size: 200% 200%;
     border-radius: 9999px;
-    filter: blur(12px);
+    filter: none;
     opacity: 0.5;
     z-index: -1;
     animation: backButtonBg 3s linear infinite;
