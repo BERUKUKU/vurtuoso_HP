@@ -1,0 +1,48 @@
+name: 本番反映（手動FTPS）
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'preview＝接続と転送対象の確認のみ / publish＝本番へ転送'
+        type: choice
+        options:
+          - preview
+          - publish
+        default: preview
+        required: true
+      include_htaccess:
+        description: '.htaccessも上書きする（通常はOFF）'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: virtuoso-production-ftps
+  cancel-in-progress: false
+
+jobs:
+  transfer:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Validate transfer script
+        run: python3 -m unittest discover -s scripts -p 'test_deploy_ftps.py'
+      - name: Preview or publish via explicit FTPS
+        env:
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          DEPLOY_MODE: ${{ inputs.mode }}
+          INCLUDE_HTACCESS: ${{ inputs.include_htaccess }}
+        run: |
+          args=(--mode "$DEPLOY_MODE")
+          if [ "$INCLUDE_HTACCESS" = "true" ]; then
+            args+=(--include-htaccess)
+          fi
+          python3 scripts/deploy_ftps.py "${args[@]}"
