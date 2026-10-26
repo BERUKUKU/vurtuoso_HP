@@ -1,0 +1,42 @@
+/* PHP confirmation and validation screens share the site's mountain / paper palette. */
+* { box-sizing: border-box; }
+body { margin: 0; background: #faf9fc; color: #3a3348; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif; line-height: 1.8; }
+a { color: inherit; }
+.response-header { height: 80px; padding: 0 clamp(24px, 5vw, 80px); display: flex; align-items: center; justify-content: space-between; background: #faf9fc; }
+.response-header img { display: block; width: 180px; height: auto; }
+.header-contact { font-size: 12px; letter-spacing: .2em; text-decoration: none; }
+.response-hero { height: 210px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; background: linear-gradient(0deg, rgba(29, 24, 46, .4), rgba(29, 24, 46, .15)), url("../assets/images/vto_hero.webp") center 48% / cover; }
+.response-hero p { font-size: clamp(26px, 4vw, 36px); font-weight: 300; letter-spacing: .18em; margin: 0 0 8px; }
+.response-hero span { font-size: 10px; letter-spacing: .22em; opacity: .85; }
+.response-content { padding: 48px 24px 24px; max-width: 880px; margin: auto; }
+.confirm-card { padding: clamp(24px, 5vw, 56px); border: 1px solid #e5dfe9; border-radius: 8px; background: rgba(255,255,255,.85); box-shadow: 0 8px 24px rgba(38,29,55,.04); }
+.eyebrow { font-size: 10px; letter-spacing: .2em; color: #887594; margin: 0 0 12px; }
+h1 { font-size: clamp(21px, 3vw, 26px); font-weight: 400; letter-spacing: .06em; line-height: 1.6; margin: 0 0 12px; }
+.response-intro { font-size: 13px; color: #736a7e; margin: 0 0 28px; }
+.response-steps { list-style: none; padding: 0 0 24px; margin: 0; display: flex; gap: 28px; font-size: 11px; letter-spacing: .08em; color: #958b9d; }
+.response-steps [aria-current] { color: #51445f; border-bottom: 1px solid #a58fb5; }
+dl { margin: 0; }
+dt { border-top: 1px solid #eee9f1; padding-top: 20px; font-size: 12px; color: #7c6b8a; letter-spacing: .04em; }
+dd { margin: 6px 0 20px; font-size: 15px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee9f1; }
+.actions form { margin: 0; }
+button { font: inherit; font-size: 13px; letter-spacing: .06em; padding: 16px 24px; min-height: 52px; border-radius: 4px; cursor: pointer; transition: border-color .2s, background-color .2s; }
+.send { color: #fff; border: 1px solid #343044; background: linear-gradient(rgba(24,20,39,.4), rgba(24,20,39,.6)), url("../assets/images/philosophy-mountainside-v1.png") center 65% / cover; }
+.send span { margin-left: 24px; }
+.send:hover { border-color: #b5a1c5; }
+.back { background: transparent; border: 1px solid #d7cfdf; color: #75658e; }
+.back:hover { background: #f8f5fb; }
+button:focus-visible, a:focus-visible { outline: 2px solid #a89abd; outline-offset: 4px; }
+.text-link { font-size: 12px; text-underline-offset: 4px; }
+.error-list { padding-left: 20px; color: #98536b; font-size: 14px; }
+.response-footer { text-align: center; padding: 32px 0 8px; font-size: 11px; letter-spacing: .06em; color: #8c8196; }
+@media (max-width: 600px) {
+  .response-header { height: 68px; }
+  .response-header img { width: 150px; }
+  .response-hero { height: 160px; }
+  .response-content { padding: 28px 16px 16px; }
+  .response-steps { gap: 22px; }
+  .actions { flex-direction: column; align-items: stretch; gap: 12px; }
+  .actions button, .actions form { width: 100%; }
+  .text-link { text-align: center; padding: 8px; }
+}
