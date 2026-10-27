@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const update = () => {
         ticking = false;
         if (motion.matches) {
-            hero.style.removeProperty('--hero-content-opacity');
+            (scene || hero).style.removeProperty('--hero-content-opacity');
             image.style.removeProperty('translate');
             if (mist) mist.style.removeProperty('transform');
             return;
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (scene) {
             const travelled = Math.max(0, -scene.getBoundingClientRect().top);
             const fade = Math.min(1, Math.max(0, (travelled / rect.height - 0.02) / 0.2));
-            hero.style.setProperty('--hero-content-opacity', String(1 - fade));
+            scene.style.setProperty('--hero-content-opacity', String(1 - fade));
         }
         const progress = Math.min(1, Math.max(0, -rect.top / rect.height));
         // Stay inside the existing image crop so no empty edges appear.

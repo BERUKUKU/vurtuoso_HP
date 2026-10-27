@@ -2994,6 +2994,14 @@ body {
 .hero-scene .hero-content {
   opacity: var(--hero-content-opacity, 1);
 }
+.hero-scene > .scroll-indicator {
+  z-index: 4;
+  top: calc(100 * var(--scene-vh) - 3rem);
+  bottom: auto;
+  transform: translate(-50%, -100%);
+  opacity: var(--hero-content-opacity, 1);
+  pointer-events: none;
+}
 body:has(.hero-scene) #philosophy {
   --rock-edge-height: clamp(160px, 20vw, 480px);
   isolation: isolate;
