@@ -3049,6 +3049,10 @@ body:has(.hero-scene) #philosophy .section-header { margin-bottom: 2.5rem; }
      Only release the sticky background: both layers then scroll together.
      A separate short ridge panel exposes the panorama's straight bottom edge. */
   .hero-scene #hero { position: relative; }
+  /* Without the scroll fade, the guide must stay above the static ridge. */
+  .hero-scene .hero-content { z-index: 4; }
+  .hero-scene .scroll-icon,
+  .hero-scene .scroll-dot { animation: none; }
 }
 
 /* Gallery waits beneath the mountain panel until the panel has scrolled away. */
