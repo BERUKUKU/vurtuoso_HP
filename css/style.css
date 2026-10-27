@@ -2944,23 +2944,31 @@ body {
 }
 
 /* One scroll scene: a stationary panorama and a moving foreground. */
+:root {
+  --scene-vh: 1vh;
+}
+@supports (height: 1svh) {
+  :root { --scene-vh: 1svh; }
+}
+/* Use one stable viewport for the sticky panel, ridge and following overlap.
+   Safari's toolbar must not put these layers on different height baselines. */
 .hero-scene {
   position: relative;
   z-index: 1;
-  height: 150vh;
+  height: calc(150 * var(--scene-vh));
   isolation: isolate;
   background: #201c32;
 }
 .hero-scene #hero {
   position: sticky;
   top: 0;
-  height: 100vh;
-  min-height: 100vh;
+  height: calc(100 * var(--scene-vh));
+  min-height: calc(100 * var(--scene-vh));
 }
 .mountain-transition {
   position: absolute;
   z-index: 3;
-  top: 62vh;
+  top: calc(62 * var(--scene-vh));
   bottom: 0;
   width: 100%;
   pointer-events: none;
@@ -2990,7 +2998,7 @@ body:has(.hero-scene) #philosophy {
   --rock-edge-height: clamp(160px, 20vw, 480px);
   isolation: isolate;
   z-index: 4;
-  margin-top: -16vh;
+  margin-top: calc(-16 * var(--scene-vh));
   padding-top: 2.5rem;
   padding-bottom: var(--rock-edge-height);
   border-radius: 0;
@@ -3032,25 +3040,25 @@ body:has(.hero-scene) #philosophy {
 #philosophy .philosophy-particles { display: none; }
 body:has(.hero-scene) #philosophy .section-header { margin-bottom: 2.5rem; }
 @media (max-width: 767px) {
-  .hero-scene { height: 140vh; }
-  .mountain-transition { top: 62vh; }
+  .hero-scene { height: calc(140 * var(--scene-vh)); }
   .mountain-foreground { width: 170%; left: -35%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-scene { height: auto; }
   body:has(.hero-scene) #philosophy { margin-top: 0; }
+  /* Keep the ridge over the panorama at its normal size and position.
+     Only release the sticky background: both layers then scroll together.
+     A separate short ridge panel exposes the panorama's straight bottom edge. */
   .hero-scene #hero { position: relative; }
-  .mountain-transition { position: relative; top: auto; height: 320px; margin-top: -100px; }
 }
 
 /* Gallery waits beneath the mountain panel until the panel has scrolled away. */
 .content-layer-stack {
-  --gallery-reveal: 45vh;
+  --gallery-reveal: calc(45 * var(--scene-vh));
   position: relative;
   z-index: 2;
   display: flow-root;
   isolation: isolate;
-  margin-top: -16vh;
+  margin-top: calc(-16 * var(--scene-vh));
 }
 /* A flow spacer, rather than parent padding, supplies the sticky travel distance. */
 .content-layer-stack::after {
@@ -3070,7 +3078,7 @@ body:has(.hero-scene) .content-layer-stack #philosophy {
   background: transparent;
 }
 @media (max-width: 767px) {
-  .content-layer-stack { --gallery-reveal: 18vh; }
+  .content-layer-stack { --gallery-reveal: calc(18 * var(--scene-vh)); }
   .content-layer-stack #gallery { padding-top: 6rem; }
 }
 @media (prefers-reduced-motion: reduce) {
